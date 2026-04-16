@@ -1,0 +1,23 @@
+# Binários compilados
+src/auxiliar
+src/sequencial
+src/paralelo_threads
+src/paralelo_processos
+*.exe
+*.o
+*.out
+
+# Matrizes geradas (podem ser muito grandes)
+matrix1.txt
+matrix2.txt
+
+# Resultados de execução gerados automaticamente
+resultado_*.txt
+_res_*.txt
+_tmp_*.txt
+
+# Arquivos de análise temporários
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

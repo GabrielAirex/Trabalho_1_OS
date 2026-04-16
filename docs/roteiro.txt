@@ -1,0 +1,128 @@
+═══════════════════════════════════════════════════════════════
+  ROTEIRO – Trabalho 1 – Sistemas Operacionais (IMD0036)
+  Gabriel Afonso Freitas Aires · 20240078874
+  Tempo total: ~3 minutos
+═══════════════════════════════════════════════════════════════
+
+[SLIDE 1 – CAPA] ⏱ 0:00 – 0:18
+──────────────────────────────────────────────────────────────
+"Olá, meu nome é Gabriel Aires, matrícula 20240078874, curso
+de Engenharia de Computação aqui no IMD, e este é o trabalho
+prático da Unidade 1 de Sistemas Operacionais, sobre
+Processos e Threads.
+
+O objetivo do trabalho foi implementar a multiplicação de
+matrizes de forma paralela e comparar o desempenho com a
+versão sequencial."
+
+
+[SLIDE 2 – O QUE FOI IMPLEMENTADO] ⏱ 0:18 – 0:45
+──────────────────────────────────────────────────────────────
+"Foram implementados quatro programas em C++:
+
+O primeiro é o Auxiliar, que gera matrizes aleatórias e salva
+em arquivo.
+
+O segundo é o Sequencial, que faz a multiplicação com três
+loops aninhados — esse é o nosso baseline de comparação.
+
+O terceiro é o Paralelo com Threads, que usa T pthreads POSIX,
+onde cada thread calcula N dividido por T linhas da matriz
+resultado.
+
+E o quarto é o Paralelo com Processos, que usa fork() para
+criar P processos filho, cada um calculando sua faixa de linhas
+e salvando em arquivo próprio.
+
+Em todos os casos, as matrizes são lidas antes de criar os
+workers — como exigido pelo enunciado."
+
+
+[SLIDE 3 – ESTRATÉGIA DE PARALELIZAÇÃO] ⏱ 0:45 – 1:05
+──────────────────────────────────────────────────────────────
+"A estratégia de divisão é simples: as N linhas da matriz
+resultado são distribuídas igualmente entre as T threads ou P
+processos. Como cada elemento C-ij depende apenas da linha i
+de M1 e da coluna j de M2, não há conflito de escrita —
+chamamos isso de Independência dos Dados.
+
+No caso das threads, todas compartilham a memória de M1 e M2,
+sem precisar de mutex. No caso dos processos, o fork usa
+copy-on-write, então os dados só são copiados se o filho
+escrever, o que não ocorre nas matrizes de entrada."
+
+
+[SLIDE 4 – RESULTADOS] ⏱ 1:05 – 1:40
+──────────────────────────────────────────────────────────────
+"Para os experimentos, testei matrizes de 100x100 até 800x800,
+com 10 execuções cada.
+
+Olhando o gráfico da matriz 800x800: o sequencial levou em
+média 354 milissegundos. Com 2 threads, caiu para 174ms.
+Com 8 threads, 68ms. E com 16 threads chegou a 57ms —
+um speedup de 6,2 vezes.
+
+Os processos seguiram um padrão parecido: com 2 processos,
+184ms. Com 16 processos, 57ms — também cerca de 6 vezes
+mais rápido que o sequencial.
+
+Para matrizes menores, como 100x100, o ganho existe mas é
+menor, porque o overhead de criar os workers compete com o
+tempo de cálculo."
+
+
+[SLIDE 5 – DISCUSSÃO] ⏱ 1:40 – 2:20
+──────────────────────────────────────────────────────────────
+"Sobre os motivos dos resultados:
+
+Primeiro — threads foram mais eficientes que processos em
+matrizes médias, porque compartilham memória sem cópia.
+Processos têm overhead do fork() e do I/O separado de cada filho.
+
+Segundo — o speedup nunca foi linear. Isso confirma a Lei de
+Amdahl: sempre há uma porção serial irredutível no programa,
+como leitura de arquivo e escrita dos resultados, que limita
+o ganho máximo. Mesmo com 16 workers, o speedup ficou em 6,2x
+e não 16x.
+
+Terceiro — de T=8 para T=16 o ganho foi menor do que de T=4
+para T=8. Isso indica que chegamos perto do limite de núcleos
+físicos da CPU — workers extras disputam os mesmos núcleos
+por time-slicing sem ganho real."
+
+
+[SLIDE 6 – CONCLUSÃO] ⏱ 2:20 – 2:50
+──────────────────────────────────────────────────────────────
+"Sobre o valor ideal de T e P:
+
+Para threads, o melhor ponto de equilíbrio foi T igual a 8,
+com boa eficiência e speedup consistente. T=16 trouxe ganho
+marginal com eficiência de apenas 44%.
+
+Para processos, P igual a 8 foi o mais estável. Com P=16,
+o resultado foi parecido com threads para matrizes grandes,
+mas com mais variabilidade.
+
+Em geral, o número ideal de workers é próximo ao número de
+núcleos lógicos da máquina.
+
+O trabalho confirmou na prática que a multiplicação de matrizes
+é um problema altamente paralelizável, com ganho real e
+expressivo — redução de 84% no tempo de execução para 800x800
+com 16 threads."
+
+
+[SLIDE 7 – ENCERRAMENTO] ⏱ 2:50 – 3:00
+──────────────────────────────────────────────────────────────
+"O código completo e o relatório estão disponíveis no meu
+GitHub em github.com/GabrielAirex. Obrigado."
+
+═══════════════════════════════════════════════════════════════
+  DICAS DE GRAVAÇÃO
+═══════════════════════════════════════════════════════════════
+- Deixe os slides em tela cheia enquanto fala
+- Seu rosto deve aparecer o tempo todo (webcam no canto)
+- Fale em ritmo normal — não acelere demais
+- Pode usar OBS Studio ou qualquer gravador de tela
+- Faça um ensaio antes para checar o tempo
+═══════════════════════════════════════════════════════════════
