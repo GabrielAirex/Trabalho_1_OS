@@ -9,6 +9,15 @@
 **IMD0036 – Sistemas Operacionais · 2026**  
 Gabriel Afonso Freitas Aires · `20240078874` · Engenharia de Computação / CT – Natal
 
+---
+
+### Entregáveis
+
+[![Video](https://img.shields.io/badge/Video_Apresentacao-Google_Drive-4285F4?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/10BmLQy7w-xvNjNxLY3hCw8018NqeaYLq/view?usp=drive_link)
+[![Relatorio PDF](https://img.shields.io/badge/Relatorio-PDF-DC143C?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](docs/relatorio.pdf)
+[![Relatorio HTML](https://img.shields.io/badge/Relatorio-HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)](docs/relatorio.html)
+[![Slides](https://img.shields.io/badge/Slides-PDF-6B46C1?style=for-the-badge&logo=files&logoColor=white)](docs/slides_apresentacao.pdf)
+
 </div>
 
 ---
@@ -49,7 +58,8 @@ trabalho1/
 │   └── gerar_slides_v2.py      # Slides da apresentação (PDF)
 │
 ├── docs/                       # Documentação e entregáveis
-│   ├── relatorio.pdf           # Relatório completo
+│   ├── relatorio.pdf           # Relatório completo (PDF, 10 páginas)
+│   ├── relatorio.html          # Relatório completo (HTML interativo)
 │   ├── slides_apresentacao.pdf # Slides do vídeo (10 slides)
 │   ├── roteiro.txt             # Roteiro do vídeo (3 min)
 │   └── graficos/               # Gráficos exportados (PNG)
@@ -235,6 +245,18 @@ python3 gerar_slides_v2.py    # → docs/slides_apresentacao.pdf
 ```
 
 Requer: `matplotlib`, `numpy` (`pip install matplotlib numpy`)
+
+---
+
+## Entregáveis
+
+| Arquivo | Formato | Descrição |
+|---------|---------|-----------|
+| [relatorio.pdf](docs/relatorio.pdf) | PDF | Relatório completo — 10 páginas A4 |
+| [relatorio.html](docs/relatorio.html) | HTML | Relatório interativo com gráficos embutidos |
+| [slides_apresentacao.pdf](docs/slides_apresentacao.pdf) | PDF | 10 slides da apresentação em vídeo |
+| [roteiro.txt](docs/roteiro.txt) | TXT | Roteiro narrado do vídeo (≤3 min) |
+| [Vídeo de Apresentação](https://drive.google.com/file/d/10BmLQy7w-xvNjNxLY3hCw8018NqeaYLq/view?usp=drive_link) | Google Drive | Apresentação em vídeo do trabalho |
 
 ---
 
